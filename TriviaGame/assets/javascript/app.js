@@ -2,10 +2,15 @@
 //the whole game is timed and when the timer runs out the game is over or when the player answers all the questions
 //at the end of the game display the score of correct and incorrect guesses
 
+$("#start").on("click", function() {
+    //  Set the button alert's timeout to run three seconds after the function's called.
+    delayButtonAlert = setTimeout(function() {
+      alert("Alert #2: Called 3 seconds after the start button is clicked.");
+    }, 3000);
+  });
 
-
-function setup() {
-    var counter = 20;
+  function setup() {
+    counter = 20;
     document.querySelector("#timer").innerHTML = "Time: " + counter;
     console.log('workin');
     var timer = setInterval(timeIt, 1000);
@@ -31,7 +36,9 @@ function setup() {
     
 };
 
+
 //Setup for questions
+var counter;
 var stepNumber = 0;
 var right = 0;
 var wrong = 0;
@@ -148,7 +155,7 @@ function randomAnswer(){
         $("#choice3").empty();
         $("#choice4").empty();
         
-        
+        counter = 20;
         stepNumber = ++stepNumber;
         renderQuestion(stepNumber);
         randomAnswer(stepNumber);
@@ -159,7 +166,10 @@ function randomAnswer(){
     }
     
     });
-  
+
+    var answerTimeout = setTimeout(function() {
+        
+      }, 5000);
 
  
 
