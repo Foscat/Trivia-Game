@@ -2,25 +2,19 @@
 //the whole game is timed and when the timer runs out the game is over or when the player answers all the questions
 //at the end of the game display the score of correct and incorrect guesses
 
-$("#start").on("click", function() {
-    //  Set the button alert's timeout to run three seconds after the function's called.
-    delayButtonAlert = setTimeout(function() {
-      alert("Alert #2: Called 3 seconds after the start button is clicked.");
-    }, 3000);
-  });
 
+//setup for timer 
   function setup() {
     counter = 20;
     document.querySelector("#timer").innerHTML = "Time: " + counter;
     console.log('workin');
-    var timer = setInterval(timeIt, 1000);
+    setInterval(timeIt, 500);
 
     
     function timeIt() {
         if (counter < 0) {
             console.log("stop")
-            stopTime();
-
+           timoutBox();
         }
          else {
             document.querySelector("#timer").innerHTML = "Time: " + counter--;
@@ -30,20 +24,49 @@ $("#start").on("click", function() {
           
     };
 
-    function stopTime() {
-        clearInterval(timer);
-    }
+   
+    
+};
+//the other timer that i need
+function secondary() {
+    secondCount = 100;
+    document.querySelector("#secondary").innerHTML = "Time: " + secondCount;
+    $("#secondary").css({
+        "opacity": "0"
+    })
+    console.log('second timer');
+    setInterval(secondTime, 1000);
+
+    
+    function secondTime() {
+        if (secondCount < 0) {
+            console.log("second time")
+            nextQuestion();
+           
+        }
+         else {
+            document.querySelector("#secondary").innerHTML = "Time: " + secondCount--;
+            console.log('second')
+
+         }
+          
+    };
+
+   
     
 };
 
 
-//Setup for questions
+//Setup for game
 var counter;
+var secondtime;
+var timeIt;
 var stepNumber = 0;
 var right = 0;
 var wrong = 0;
 var timeUp = 0;
 var x1, x2, x3, x4;
+var x5;
 
 var questions = [
     { q:"What is George's go-to alter ego?", a:"Art Vandelay", d1:"Rusty Shackleford", d2:"Chuck Finley", d3:"Seymour Butz"},
@@ -52,7 +75,7 @@ var questions = [
     { q:"Who was the man in the cape?", a:"Frank's Lawyer", d1:"Superman", d2:"Larry David", d3:"Lloyd Braun"},
     { q:"Where did J. Peterman go?", a:"Burma", d1:"Arazona", d2:"Mexico", d3:"Canada"},
     { q:"Who stole Elaine's armoire", a:"Gay street thugs", d1:"Newman", d2:"The Soup Nazi", d3:"Russell Dowripple"},
-    { q:"what magizine was George looking at when his mom came home?", a:"Glamour", d1:"Mad", d2:"Sports Illustrated", d3:"TV guide"},
+    { q:"What magizine was George looking at when his mom came home?", a:"Glamour", d1:"Mad", d2:"Sports Illustrated", d3:"TV guide"},
     { q:"What did Elaine call David Putty when he wore his fur coat?", a:"Dr.Zaius", d1:"Curt Russell", d2:"Furbaby", d3:"Boytoy"},
     { q:"What is Davids Putty's money with a hole in it?", a:"Kroner", d1:"Bitcoin", d2:"Dinar", d3:"Eurotrash"},
     { q:"What was on the $20 George thought the cashier stole?", a:"Red lipstick on the president", d1:"Lotto Number", d2:"Uma Thurman's number", d3:"A coffee stain"},
@@ -60,9 +83,16 @@ var questions = [
     { q:"What was Kenny Bania's favorite resturant?", a:"Mendy's", d1:"Applebees", d2:"Monks", d3:"Poconos Pizza"},
     
 ];
-var computerObject = questions[stepNumber];
+var image =[
+    "assets/images/green-tick.png",
+    "assets/images/wrong.jpg",
+    "assets/images/out-of-time-.png"
+
+]
 
 
+
+//calls and displays the question
 function renderQuestion(stepNumber){
   
     var computerObject = questions[stepNumber];
@@ -70,20 +100,20 @@ function renderQuestion(stepNumber){
      
     document.querySelector('#question').innerHTML = computerObject.q;
     
-    console.log(computerObject);
+    
 };
 
+//scrambles answer choices
 function randomAnswer(){
      randomNumber = Math.floor(Math.random() * 8) + 1;
      var computerObject = questions[stepNumber];
-     console.log(randomNumber);
-     console.log(stepNumber);
-     console.log(computerObject);
+   
      if(randomNumber === 1){
          x1=computerObject.a;
          x2=computerObject.d1;
          x3=computerObject.d2;
          x4=computerObject.d3;
+         x5=1;
 
      }
      if(randomNumber === 2){
@@ -91,6 +121,7 @@ function randomAnswer(){
         x2=computerObject.a;
         x3=computerObject.d2;
         x4=computerObject.d3;
+        x5=2;
 
     }
     if(randomNumber === 3){
@@ -98,13 +129,14 @@ function randomAnswer(){
         x2=computerObject.d2;
         x3=computerObject.a;
         x4=computerObject.d3;
-
+        x5=3;
     }
     if(randomNumber === 4){
         x1=computerObject.d1;
         x2=computerObject.d2;
         x3=computerObject.d3;
         x4=computerObject.a;
+        x5=4;
 
     }
     if(randomNumber === 5){
@@ -112,6 +144,7 @@ function randomAnswer(){
         x2=computerObject.d1;
         x3=computerObject.d3;
         x4=computerObject.a;
+        x5=4;
 
     }
     if(randomNumber === 6){
@@ -119,21 +152,25 @@ function randomAnswer(){
         x2=computerObject.d3;
         x3=computerObject.d1;
         x4=computerObject.a;
+        x5=4;
 
     } if(randomNumber === 7){
         x1=computerObject.d3;
         x2=computerObject.d2;
         x3=computerObject.a;
         x4=computerObject.d1;
+        x5=3;
 
     } if(randomNumber === 8){
         x1=computerObject.d1;
         x2=computerObject.d3;
         x3=computerObject.d2;
         x4=computerObject.a;
+        x5=4;
         
 
     }
+    //assigns answer slots on the html to the scramble
     document.querySelector('#choice1').innerHTML = x1;
     document.querySelector('#choice2').innerHTML = x2;
     document.querySelector('#choice3').innerHTML = x3;
@@ -141,45 +178,274 @@ function randomAnswer(){
 };
    
 
-
+//how to select answers 
    $(document).on('click', '.option', function (){
     var computerObject = questions[stepNumber];
     console.log(this)
-    console.log(computerObject)
+
+    //for right answers
     if(this.innerHTML === computerObject.a){
-        alert("Good Job")
-        
-        $("#question").empty();
-        $("#choice1").empty();
-        $("#choice2").empty();
-        $("#choice3").empty();
-        $("#choice4").empty();
-        
-        counter = 20;
-        stepNumber = ++stepNumber;
-        renderQuestion(stepNumber);
-        randomAnswer(stepNumber);
-        console.log(stepNumber);
+      right++;
+      console.log("Right answers: " + right);
+      $("#question").empty();
+      winBox();
+      
     }
+    
+    //for wrong answers
     else{
-        alert("Dummy")
+        wrong++
+        console.log("Wrong Answers: " + wrong);
+       $("#question").empty();
+       loseBox();
+       
+        
+    }
+console.log(stepNumber);
+    if(stepNumber === 11){
+        
+        endGame();
     }
     
     });
+    
 
-    var answerTimeout = setTimeout(function() {
+    function endGame(){
         
-      }, 5000);
+            $("#question").empty();
+            $("#choice1").empty();
+            $("#choice2").empty();
+            $("#choice3").empty();
+            $("#choice4").empty();
+            $("#image-box").empty();
+            var timout = 12-(right + wrong);
+            $("#timer").css({
+                "opacity": "0"
+            });
+            counter = 900000;
+            secondCount = 900000;
+
+
+            document.querySelector("#question").innerHTML = "Game Over!!!";
+            document.querySelector("#choice1").innerHTML = "Your scores are";
+            document.querySelector("#choice2").innerHTML = "Correct answers: " + right;
+            document.querySelector("#choice3").innerHTML = "Incorrect answers: " + wrong;
+            document.querySelector("#choice4").innerHTML = "Ran out of time: " + timout;
+        
+    };
+
+
+//clears previous info on page and calls next question to be displayed in its place
+  function nextQuestion(){
+    $("#question").empty();
+    $("#choice1").empty();
+    $("#choice2").empty();
+    $("#choice3").empty();
+    $("#choice4").empty();
+    $("#image-box").empty();
+    
+    
+    counter = 20;
+    secondCount = 50;
+    stepNumber = ++stepNumber;
+    $(".option").css({
+        "color": 'rgb(36, 26, 16)',
+        "font-weight": 'normal'
+    });
+    $("#question").css({
+        "color": 'rgb(36, 26, 16)',
+        "font-weight": 'normal',
+        "font-size": '32px'
+    });
+    $("#timer").css({
+        "opacity": "1"
+    });
+    renderQuestion(stepNumber);
+    randomAnswer(stepNumber);
+    
+  };
+
+  function winBox(){
+    computerObject = questions[stepNumber];
+    $("#timer").css({
+        "opacity": "0"
+    });
+    counter = 30;
+    secondCount = 5;
+    $("#question").css({
+        "color": 'rgb(36, 9, 109)',
+        "font-weight": 'bolder',
+        "font-size": '60px'
+    })
+    document.querySelector("#question").innerHTML = "Correct";
+   console.log(x5);
+if(x5 === 1){
+       $("#choice1").css({
+           "color": 'green',
+           "font-weight": 'bold'
+       });
+}
+if(x5 === 2){
+    $("#choice2").css({
+        "color": 'green',
+        "font-weight": 'bold'
+    });
+}
+if(x5 === 3){
+    $("#choice3").css({
+        "color": 'green',
+        "font-weight": 'bold'
+    });
+}
+if(x5 === 4){
+    $("#choice4").css({
+        "color": 'green',
+        "font-weight": 'bold'
+    });
+}
+
+var check = $("<div>");
+check.attr({
+    "id": 'good'
+});
+check.css({
+    "height": '200px',
+    "width": '200px',
+    "background-image":"url('" + image[0] + "')",
+    "background-size":"cover",
+    "margin": '0% 45%'
+});
+$("#image-box").append(check);
+    
+    
+  };
+
 
  
+  function loseBox(){
+     computerObject = questions[stepNumber];
+     $("#timer").css({
+        "opacity": "0"
+    });
+     counter = 30;
+     secondCount = 5;
+     
+     $("#question").css({
+         "color": 'red',
+         "font-weight": 'bolder',
+         "font-size": '60px'
+     })
+     document.querySelector("#question").innerHTML = "Wrong!!!";
+    console.log(x5);
+ if(x5 === 1){
+        $("#choice1").css({
+            "color": 'green',
+            "font-weight": 'bold'
+        });
+ }
+ if(x5 === 2){
+     $("#choice2").css({
+         "color": 'green',
+         "font-weight": 'bold'
+     });
+ }
+ if(x5 === 3){
+     $("#choice3").css({
+         "color": 'green',
+         "font-weight": 'bold'
+     });
+ }
+ if(x5 === 4){
+     $("#choice4").css({
+         "color": 'green',
+         "font-weight": 'bold'
+     });
+ }
 
- 
+ var mark = $("<div>");
+mark.attr({
+    "id": 'bad'
+});
+mark.css({
+    "height": '200px',
+    "width": '200px',
+    "background-image":"url('" + image[1] + "')",
+    "background-size":"cover",
+    "margin": '0% 45%'
+});
+$("#image-box").append(mark);
+     
+     
+     
+   };
+
+   function timoutBox(){
+     computerObject = questions[stepNumber];
+     $("#timer").css({
+        "opacity": "0"
+    });
+     counter = 30;
+     secondCount = 5;
+     $("#question").css({
+         "color": 'red',
+         "font-weight": 'bolder',
+         "font-size": '60px'
+     })
+     document.querySelector("#question").innerHTML = "Your outta time!!!";
+    console.log(x5);
+ if(x5 === 1){
+        $("#choice1").css({
+            "color": 'green',
+            "font-weight": 'bold'
+        });
+ }
+ if(x5 === 2){
+     $("#choice2").css({
+         "color": 'green',
+         "font-weight": 'bold'
+     });
+ }
+ if(x5 === 3){
+     $("#choice3").css({
+         "color": 'green',
+         "font-weight": 'bold'
+     });
+ }
+ if(x5 === 4){
+     $("#choice4").css({
+         "color": 'green',
+         "font-weight": 'bold'
+     });
+ }
+
+ var outta = $("<div>");
+outta.attr({
+    "id": 'bad'
+});
+outta.css({
+    "height": '200px',
+    "width": '200px',
+    "background-image":"url('" + image[2] + "')",
+    "background-size":"cover",
+    "margin": '0% 45%'
+});
+$("#image-box").append(outta);
+     
+     
+     
+   };
+
+  
  
  //this is where the game starts
-console.log(stepNumber);
+$(document).on('click', '#startBtn', function(){
  renderQuestion(stepNumber);
  randomAnswer();
  setup();
+ secondary();
+ $("#startBox").hide();
  
+
+});
  
 
