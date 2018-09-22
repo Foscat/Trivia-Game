@@ -7,18 +7,18 @@
   function setup() {
     counter = 20;
     document.querySelector("#timer").innerHTML = "Time: " + counter;
-    console.log('workin');
-    setInterval(timeIt, 500);
+    
+    setInterval(timeIt, 1000);
 
     
     function timeIt() {
         if (counter < 0) {
-            console.log("stop")
+            
            timoutBox();
         }
          else {
             document.querySelector("#timer").innerHTML = "Time: " + counter--;
-            console.log('work')
+            
 
          }
           
@@ -27,26 +27,26 @@
    
     
 };
-//the other timer that i need
+//set up for the other timer 
 function secondary() {
     secondCount = 100;
     document.querySelector("#secondary").innerHTML = "Time: " + secondCount;
     $("#secondary").css({
         "opacity": "0"
     })
-    console.log('second timer');
+    
     setInterval(secondTime, 1000);
 
     
     function secondTime() {
         if (secondCount < 0) {
-            console.log("second time")
+            
             nextQuestion();
            
         }
          else {
             document.querySelector("#secondary").innerHTML = "Time: " + secondCount--;
-            console.log('second')
+            
 
          }
           
@@ -68,6 +68,7 @@ var timeUp = 0;
 var x1, x2, x3, x4;
 var x5;
 
+//questions along with answers and distractors
 var questions = [
     { q:"What is George's go-to alter ego?", a:"Art Vandelay", d1:"Rusty Shackleford", d2:"Chuck Finley", d3:"Seymour Butz"},
     { q:"What is 'little Jerry'?", a:"A cockfighting chicken", d1:"Jerry's son", d2:"Kramers midget friend", d3:"Jerry's dog"},
@@ -83,10 +84,12 @@ var questions = [
     { q:"What was Kenny Bania's favorite resturant?", a:"Mendy's", d1:"Applebees", d2:"Monks", d3:"Poconos Pizza"},
     
 ];
+
+//images gor answers
 var image =[
     "assets/images/green-tick.png",
     "assets/images/wrong.jpg",
-    "assets/images/out-of-time-.png"
+    "assets/images/time.jpg"
 
 ]
 
@@ -201,7 +204,7 @@ function randomAnswer(){
        
         
     }
-console.log(stepNumber);
+    //if the game reaches the end of the questions display endgame screen
     if(stepNumber === 11){
         
         endGame();
@@ -222,17 +225,54 @@ console.log(stepNumber);
             $("#timer").css({
                 "opacity": "0"
             });
+
+            $(".option").css({
+                "color": 'rgb(36, 26, 16)',
+                "font-weight": 'normal',
+                "background-color": 'none'
+            });
             counter = 900000;
             secondCount = 900000;
 
-
+            //restart button was verry buggy and i could not make it work right so i removed it from the final
+           // $("#restart-Btn").show();
             document.querySelector("#question").innerHTML = "Game Over!!!";
             document.querySelector("#choice1").innerHTML = "Your scores are";
             document.querySelector("#choice2").innerHTML = "Correct answers: " + right;
             document.querySelector("#choice3").innerHTML = "Incorrect answers: " + wrong;
             document.querySelector("#choice4").innerHTML = "Ran out of time: " + timout;
+            
+            
         
     };
+
+    //restart button was verry buggy and i could not make it work right so i removed it from the final
+    // $(document).on('click', '#restart-Btn', function(){
+    //     computerObject = questions[stepNumber];
+    //         $("#question").empty();
+    //         $("#choice1").empty();
+    //         $("#choice2").empty();
+    //         $("#choice3").empty();
+    //         $("#choice4").empty();
+    //         $("#image-box").empty();
+    //         $("#restart-Btn").hide(); 
+    //         $("#question").css({
+    //             "color": 'rgb(36, 26, 16)',
+    //             "font-weight": 'normal',
+    //             "font-size": '32px'
+    //         });
+    //         $("#timer").css({
+    //             "opacity": "1"
+    //         });
+    //     renderQuestion(stepNumber);
+    //     randomAnswer();
+    //      right = 0;
+    //      wrong = 0;
+         
+         
+
+    // });
+
 
 
 //clears previous info on page and calls next question to be displayed in its place
@@ -250,8 +290,9 @@ console.log(stepNumber);
     stepNumber = ++stepNumber;
     $(".option").css({
         "color": 'rgb(36, 26, 16)',
-        "font-weight": 'normal'
+        "font-weight": 'normal',
     });
+    
     $("#question").css({
         "color": 'rgb(36, 26, 16)',
         "font-weight": 'normal',
@@ -271,7 +312,7 @@ console.log(stepNumber);
         "opacity": "0"
     });
     counter = 30;
-    secondCount = 5;
+    secondCount = 3;
     $("#question").css({
         "color": 'rgb(36, 9, 109)',
         "font-weight": 'bolder',
@@ -282,25 +323,29 @@ console.log(stepNumber);
 if(x5 === 1){
        $("#choice1").css({
            "color": 'green',
-           "font-weight": 'bold'
+           "font-weight": 'bold',
+          // "background-color": 'black'
        });
 }
 if(x5 === 2){
     $("#choice2").css({
         "color": 'green',
-        "font-weight": 'bold'
+        "font-weight": 'bold',
+       //// "background-color": 'black'
     });
 }
 if(x5 === 3){
     $("#choice3").css({
         "color": 'green',
-        "font-weight": 'bold'
+        "font-weight": 'bold',
+       // "background-color": 'black'
     });
 }
 if(x5 === 4){
     $("#choice4").css({
         "color": 'green',
-        "font-weight": 'bold'
+        "font-weight": 'bold',
+       // "background-color": 'black'
     });
 }
 
@@ -328,7 +373,7 @@ $("#image-box").append(check);
         "opacity": "0"
     });
      counter = 30;
-     secondCount = 5;
+     secondCount = 3;
      
      $("#question").css({
          "color": 'red',
@@ -340,25 +385,29 @@ $("#image-box").append(check);
  if(x5 === 1){
         $("#choice1").css({
             "color": 'green',
-            "font-weight": 'bold'
+            "font-weight": 'bold',
+         //   "background-color": 'black'
         });
  }
  if(x5 === 2){
      $("#choice2").css({
          "color": 'green',
-         "font-weight": 'bold'
+         "font-weight": 'bold',
+        // "background-color": 'black'
      });
  }
  if(x5 === 3){
      $("#choice3").css({
          "color": 'green',
-         "font-weight": 'bold'
+         "font-weight": 'bold',
+        // "background-color": 'black'
      });
  }
  if(x5 === 4){
      $("#choice4").css({
          "color": 'green',
-         "font-weight": 'bold'
+         "font-weight": 'bold',
+        // "background-color": 'black'
      });
  }
 
@@ -385,7 +434,7 @@ $("#image-box").append(mark);
         "opacity": "0"
     });
      counter = 30;
-     secondCount = 5;
+     secondCount = 3;
      $("#question").css({
          "color": 'red',
          "font-weight": 'bolder',
@@ -396,25 +445,29 @@ $("#image-box").append(mark);
  if(x5 === 1){
         $("#choice1").css({
             "color": 'green',
-            "font-weight": 'bold'
+            "font-weight": 'bold',
+          //  "background-color": 'black'
         });
  }
  if(x5 === 2){
      $("#choice2").css({
          "color": 'green',
-         "font-weight": 'bold'
+         "font-weight": 'bold',
+       //  "background-color": 'black'
      });
  }
  if(x5 === 3){
      $("#choice3").css({
          "color": 'green',
-         "font-weight": 'bold'
+         "font-weight": 'bold',
+        // "background-color": 'black'
      });
  }
  if(x5 === 4){
      $("#choice4").css({
          "color": 'green',
-         "font-weight": 'bold'
+         "font-weight": 'bold',
+        // "background-color": 'black'
      });
  }
 
@@ -435,9 +488,9 @@ $("#image-box").append(outta);
      
    };
 
-  
- 
+
  //this is where the game starts
+ $("#restart-Btn").hide(); 
 $(document).on('click', '#startBtn', function(){
  renderQuestion(stepNumber);
  randomAnswer();
