@@ -236,11 +236,11 @@ function randomAnswer(){
 
             //restart button was verry buggy and i could not make it work right so i removed it from the final
            // $("#restart-Btn").show();
-            document.querySelector("#question").innerHTML = "Game Over!!!";
-            document.querySelector("#choice1").innerHTML = "Your scores are";
-            document.querySelector("#choice2").innerHTML = "Correct answers: " + right;
-            document.querySelector("#choice3").innerHTML = "Incorrect answers: " + wrong;
-            document.querySelector("#choice4").innerHTML = "Ran out of time: " + timout;
+           // document.querySelector("#question").innerHTML = "Game Over!!!";
+            //document.querySelector("#choice1").innerHTML = "Your scores are";
+            //document.querySelector("#choice2").innerHTML = "Correct answers: " + right;
+            //document.querySelector("#choice3").innerHTML = "Incorrect answers: " + wrong;
+            //document.querySelector("#choice4").innerHTML = "Ran out of time: " + timout;
             
             
         
