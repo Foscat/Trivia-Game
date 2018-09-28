@@ -7,18 +7,18 @@
   function setup() {
     counter = 20;
     document.querySelector("#timer").innerHTML = "Time: " + counter;
-    
+    console.log('workin');
     setInterval(timeIt, 1000);
 
     
     function timeIt() {
         if (counter < 0) {
-            
+            console.log("stop")
            timoutBox();
         }
          else {
             document.querySelector("#timer").innerHTML = "Time: " + counter--;
-            
+            console.log('work')
 
          }
           
@@ -27,26 +27,26 @@
    
     
 };
-//set up for the other timer 
+//the other timer that i need
 function secondary() {
     secondCount = 100;
     document.querySelector("#secondary").innerHTML = "Time: " + secondCount;
     $("#secondary").css({
         "opacity": "0"
     })
-    
+    console.log('second timer');
     setInterval(secondTime, 1000);
 
     
     function secondTime() {
         if (secondCount < 0) {
-            
+            console.log("second time")
             nextQuestion();
            
         }
          else {
             document.querySelector("#secondary").innerHTML = "Time: " + secondCount--;
-            
+            console.log('second')
 
          }
           
@@ -68,7 +68,6 @@ var timeUp = 0;
 var x1, x2, x3, x4;
 var x5;
 
-//questions along with answers and distractors
 var questions = [
     { q:"What is George's go-to alter ego?", a:"Art Vandelay", d1:"Rusty Shackleford", d2:"Chuck Finley", d3:"Seymour Butz"},
     { q:"What is 'little Jerry'?", a:"A cockfighting chicken", d1:"Jerry's son", d2:"Kramers midget friend", d3:"Jerry's dog"},
@@ -84,12 +83,10 @@ var questions = [
     { q:"What was Kenny Bania's favorite resturant?", a:"Mendy's", d1:"Applebees", d2:"Monks", d3:"Poconos Pizza"},
     
 ];
-
-//images gor answers
 var image =[
     "assets/images/green-tick.png",
     "assets/images/wrong.jpg",
-    "assets/images/time.jpg"
+    "assets/images/time.png"
 
 ]
 
@@ -204,7 +201,7 @@ function randomAnswer(){
        
         
     }
-    //if the game reaches the end of the questions display endgame screen
+console.log(stepNumber);
     if(stepNumber === 11){
         
         endGame();
@@ -225,35 +222,17 @@ function randomAnswer(){
             $("#timer").css({
                 "opacity": "0"
             });
-
-            $(".option").css({
-                "color": 'rgb(36, 26, 16)',
-                "font-weight": 'normal'
-            });
             counter = 900000;
             secondCount = 900000;
 
-            $("#restart-Btn").show();
+
             document.querySelector("#question").innerHTML = "Game Over!!!";
             document.querySelector("#choice1").innerHTML = "Your scores are";
             document.querySelector("#choice2").innerHTML = "Correct answers: " + right;
             document.querySelector("#choice3").innerHTML = "Incorrect answers: " + wrong;
             document.querySelector("#choice4").innerHTML = "Ran out of time: " + timout;
-            
-            
         
     };
-
-    
-    $(document).on('click', '#restart-Btn', function(){
-        renderQuestion(0);
-        randomAnswer();
-         right = 0;
-         wrong = 0;
-         
-
-    });
-
 
 
 //clears previous info on page and calls next question to be displayed in its place
@@ -292,7 +271,7 @@ function randomAnswer(){
         "opacity": "0"
     });
     counter = 30;
-    secondCount = 3;
+    secondCount = 5;
     $("#question").css({
         "color": 'rgb(36, 9, 109)',
         "font-weight": 'bolder',
@@ -349,7 +328,7 @@ $("#image-box").append(check);
         "opacity": "0"
     });
      counter = 30;
-     secondCount = 3;
+     secondCount = 5;
      
      $("#question").css({
          "color": 'red',
@@ -406,7 +385,7 @@ $("#image-box").append(mark);
         "opacity": "0"
     });
      counter = 30;
-     secondCount = 3;
+     secondCount = 5;
      $("#question").css({
          "color": 'red',
          "font-weight": 'bolder',
@@ -456,9 +435,9 @@ $("#image-box").append(outta);
      
    };
 
-
+  
+ 
  //this is where the game starts
- $("#restart-Btn").hide(); 
 $(document).on('click', '#startBtn', function(){
  renderQuestion(stepNumber);
  randomAnswer();
