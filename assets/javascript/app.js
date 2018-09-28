@@ -228,50 +228,31 @@ function randomAnswer(){
 
             $(".option").css({
                 "color": 'rgb(36, 26, 16)',
-                "font-weight": 'normal',
-                "background-color": 'none'
+                "font-weight": 'normal'
             });
             counter = 900000;
             secondCount = 900000;
 
-            //restart button was verry buggy and i could not make it work right so i removed it from the final
-           // $("#restart-Btn").show();
-           // document.querySelector("#question").innerHTML = "Game Over!!!";
-            //document.querySelector("#choice1").innerHTML = "Your scores are";
-            //document.querySelector("#choice2").innerHTML = "Correct answers: " + right;
-            //document.querySelector("#choice3").innerHTML = "Incorrect answers: " + wrong;
-            //document.querySelector("#choice4").innerHTML = "Ran out of time: " + timout;
+            $("#restart-Btn").show();
+            document.querySelector("#question").innerHTML = "Game Over!!!";
+            document.querySelector("#choice1").innerHTML = "Your scores are";
+            document.querySelector("#choice2").innerHTML = "Correct answers: " + right;
+            document.querySelector("#choice3").innerHTML = "Incorrect answers: " + wrong;
+            document.querySelector("#choice4").innerHTML = "Ran out of time: " + timout;
             
             
         
     };
 
-    //restart button was verry buggy and i could not make it work right so i removed it from the final
-    // $(document).on('click', '#restart-Btn', function(){
-    //     computerObject = questions[stepNumber];
-    //         $("#question").empty();
-    //         $("#choice1").empty();
-    //         $("#choice2").empty();
-    //         $("#choice3").empty();
-    //         $("#choice4").empty();
-    //         $("#image-box").empty();
-    //         $("#restart-Btn").hide(); 
-    //         $("#question").css({
-    //             "color": 'rgb(36, 26, 16)',
-    //             "font-weight": 'normal',
-    //             "font-size": '32px'
-    //         });
-    //         $("#timer").css({
-    //             "opacity": "1"
-    //         });
-    //     renderQuestion(stepNumber);
-    //     randomAnswer();
-    //      right = 0;
-    //      wrong = 0;
-         
+    
+    $(document).on('click', '#restart-Btn', function(){
+        renderQuestion(0);
+        randomAnswer();
+         right = 0;
+         wrong = 0;
          
 
-    // });
+    });
 
 
 
@@ -290,9 +271,8 @@ function randomAnswer(){
     stepNumber = ++stepNumber;
     $(".option").css({
         "color": 'rgb(36, 26, 16)',
-        "font-weight": 'normal',
+        "font-weight": 'normal'
     });
-    
     $("#question").css({
         "color": 'rgb(36, 26, 16)',
         "font-weight": 'normal',
@@ -323,29 +303,25 @@ function randomAnswer(){
 if(x5 === 1){
        $("#choice1").css({
            "color": 'green',
-           "font-weight": 'bold',
-          // "background-color": 'black'
+           "font-weight": 'bold'
        });
 }
 if(x5 === 2){
     $("#choice2").css({
         "color": 'green',
-        "font-weight": 'bold',
-       //// "background-color": 'black'
+        "font-weight": 'bold'
     });
 }
 if(x5 === 3){
     $("#choice3").css({
         "color": 'green',
-        "font-weight": 'bold',
-       // "background-color": 'black'
+        "font-weight": 'bold'
     });
 }
 if(x5 === 4){
     $("#choice4").css({
         "color": 'green',
-        "font-weight": 'bold',
-       // "background-color": 'black'
+        "font-weight": 'bold'
     });
 }
 
@@ -385,29 +361,25 @@ $("#image-box").append(check);
  if(x5 === 1){
         $("#choice1").css({
             "color": 'green',
-            "font-weight": 'bold',
-         //   "background-color": 'black'
+            "font-weight": 'bold'
         });
  }
  if(x5 === 2){
      $("#choice2").css({
          "color": 'green',
-         "font-weight": 'bold',
-        // "background-color": 'black'
+         "font-weight": 'bold'
      });
  }
  if(x5 === 3){
      $("#choice3").css({
          "color": 'green',
-         "font-weight": 'bold',
-        // "background-color": 'black'
+         "font-weight": 'bold'
      });
  }
  if(x5 === 4){
      $("#choice4").css({
          "color": 'green',
-         "font-weight": 'bold',
-        // "background-color": 'black'
+         "font-weight": 'bold'
      });
  }
 
@@ -445,29 +417,25 @@ $("#image-box").append(mark);
  if(x5 === 1){
         $("#choice1").css({
             "color": 'green',
-            "font-weight": 'bold',
-          //  "background-color": 'black'
+            "font-weight": 'bold'
         });
  }
  if(x5 === 2){
      $("#choice2").css({
          "color": 'green',
-         "font-weight": 'bold',
-       //  "background-color": 'black'
+         "font-weight": 'bold'
      });
  }
  if(x5 === 3){
      $("#choice3").css({
          "color": 'green',
-         "font-weight": 'bold',
-        // "background-color": 'black'
+         "font-weight": 'bold'
      });
  }
  if(x5 === 4){
      $("#choice4").css({
          "color": 'green',
-         "font-weight": 'bold',
-        // "background-color": 'black'
+         "font-weight": 'bold'
      });
  }
 
