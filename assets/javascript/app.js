@@ -68,28 +68,93 @@ var timeUp = 0;
 var x1, x2, x3, x4;
 var x5;
 
-var questions = [
-    { q:"What is George's go-to alter ego?", a:"Art Vandelay", d1:"Rusty Shackleford", d2:"Chuck Finley", d3:"Seymour Butz"},
-    { q:"What is 'little Jerry'?", a:"A cockfighting chicken", d1:"Jerry's son", d2:"Kramers midget friend", d3:"Jerry's dog"},
-    { q:"What did Poppy do to Jerry's counch?", a:"Sat on it and peed himself", d1:"Wiped boogers on the armrest", d2:"Spilled a drink", d3:"Threw it out the window"},
-    { q:"Who was the man in the cape?", a:"Frank's Lawyer", d1:"Superman", d2:"Larry David", d3:"Lloyd Braun"},
-    { q:"Where did J. Peterman go?", a:"Burma", d1:"Arazona", d2:"Mexico", d3:"Canada"},
-    { q:"Who stole Elaine's armoire", a:"Gay street thugs", d1:"Newman", d2:"The Soup Nazi", d3:"Russell Dowripple"},
-    { q:"What magizine was George looking at when his mom came home?", a:"Glamour", d1:"Mad", d2:"Sports Illustrated", d3:"TV guide"},
-    { q:"What did Elaine call David Putty when he wore his fur coat?", a:"Dr.Zaius", d1:"Curt Russell", d2:"Furbaby", d3:"Boytoy"},
-    { q:"What is Davids Putty's money with a hole in it?", a:"Kroner", d1:"Bitcoin", d2:"Dinar", d3:"Eurotrash"},
-    { q:"What was on the $20 George thought the cashier stole?", a:"Red lipstick on the president", d1:"Lotto Number", d2:"Uma Thurman's number", d3:"A coffee stain"},
-    { q:"Who was not 'sponge-worthy'?", a:"Jerry", d1:"Newman", d2:"Kramer", d3:"David Putty"},
-    { q:"What was Kenny Bania's favorite resturant?", a:"Mendy's", d1:"Applebees", d2:"Monks", d3:"Poconos Pizza"},
-    
-];
-var image =[
-    "assets/images/green-tick.png",
-    "assets/images/wrong.jpg",
-    "assets/images/time.png"
+var questions = [{
+     q:"What is George's go-to alter ego?",
+     a:"Art Vandelay",
+     d1:"Rusty Shackleford", 
+     d2:"Chuck Finley", 
+     d3:"Seymour Butz",
+     image:"assets/images/art-van-crop.png"
+    },{
+     q:"What is 'little Jerry'?",
+     a:"A cockfighting chicken", 
+     d1:"Jerry's son", 
+     d2:"Kramers midget friend", 
+     d3:"Jerry's dog",
+     image: "assets/images/The_little_jerry.jpg"
+    },{
+     q:"What did Poppy do to Jerry's counch?", 
+     a:"Sat on it and peed himself", 
+     d1:"Wiped boogers on the armrest", 
+     d2:"Spilled a drink", 
+     d3:"Threw it out the window",
+     image: "assets/images/poppy-pee.jpg"
+    },{
+     q:"Who was the man in the cape?", 
+     a:"Frank's Lawyer", 
+     d1:"Superman", 
+     d2:"Larry David", 
+     d3:"Lloyd Braun",
+     image: "assets/images/Cape.jpg"
+    },{
+     q:"Where did J. Peterman go?", 
+     a:"Burma", 
+     d1:"Arazona", 
+     d2:"Mexico", 
+     d3:"Canada",
+     image: "assets/images/myanmar.png"
+    },{
+     q:"Who stole Elaine's armoire", 
+     a:"Gay street toughs", 
+     d1:"Newman", 
+     d2:"The Soup Nazi", 
+     d3:"Russell Dowripple",
+     image: "assets/images/gay-street.jpg"
+    },{
+     q:"What magizine was George looking at when his mom came home?", 
+     a:"Glamour", 
+     d1:"Mad", 
+     d2:"Sports Illustrated", 
+     d3:"TV guide",
+     image: "assets/images/glamor.png"
+    },{
+     q:"What did Elaine call David Putty when he wore his fur coat?", 
+     a:"Dr.Zaius", 
+     d1:"Curt Russell", 
+     d2:"Furbaby", 
+     d3:"Boytoy",
+     image: "assets\images\putty-fur.jpg"
+    },{
+     q:"What is Davids Putty's money with a hole in it?", 
+     a:"Kroner", 
+     d1:"Bitcoin", 
+     d2:"Dinar", 
+     d3:"Eurotrash",
+     image: "assets/images/kroner.jpg"
+    },{
+     q:"What was on the $20 George thought the cashier stole?", 
+     a:"Red lipstick on the president", 
+     d1:"Lotto Number", 
+     d2:"Uma Thurman's number", 
+     d3:"A coffee stain",
+     image: "assets/images/lipstick.jpg"
+    },{ 
+     q:"Who was not 'sponge-worthy'?", 
+     a:"Jerry", 
+     d1:"Newman", 
+     d2:"Kramer", 
+     d3:"David Putty",
+     image: "assets\images\The_sponge.jpg"
+    },{
+     q:"What was Kenny Bania's favorite resturant?", 
+     a:"Mendy's", 
+     d1:"Applebees", 
+     d2:"Monks", 
+     d3:"Poconos Pizza",
+     image: "assets/images/kenny-bania.jpg"
+    }];
 
-]
-
+var image = ["assets/images/wrong-anonc.png", "assets/images/timout.png"]
 
 
 //calls and displays the question
@@ -181,6 +246,7 @@ function randomAnswer(){
 //how to select answers 
    $(document).on('click', '.option', function (){
     var computerObject = questions[stepNumber];
+    
     console.log(this)
 
     //for right answers
@@ -266,6 +332,7 @@ console.log(stepNumber);
   };
 
   function winBox(){
+    
     computerObject = questions[stepNumber];
     $("#timer").css({
         "opacity": "0"
@@ -311,8 +378,9 @@ check.attr({
 check.css({
     "height": '200px',
     "width": '200px',
-    "background-image":"url('" + image[0] + "')",
+    "background-image":"url('" + questions[stepNumber].image + "')",
     "background-size":"cover",
+    "background position": "center",
     "margin": '0% 45%'
 });
 $("#image-box").append(check);
@@ -369,8 +437,9 @@ mark.attr({
 mark.css({
     "height": '200px',
     "width": '200px',
-    "background-image":"url('" + image[1] + "')",
+    "background-image":"url('" + image[0] + "')",
     "background-size":"cover",
+    "background-position": "center",
     "margin": '0% 45%'
 });
 $("#image-box").append(mark);
@@ -425,8 +494,9 @@ outta.attr({
 outta.css({
     "height": '200px',
     "width": '200px',
-    "background-image":"url('" + image[2] + "')",
+    "background-image":"url('" + image[1] + "')",
     "background-size":"cover",
+    "background position": "center",
     "margin": '0% 45%'
 });
 $("#image-box").append(outta);
